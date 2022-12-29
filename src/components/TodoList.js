@@ -1,17 +1,21 @@
 import './TodoList.css';
 
-export function TodoList(props) {
+function TodoList({ todos, updateTodo, deleteTodo, isChecked }) {
     return (
         <div>
-            {props.values.map((task) => {
-                return (
-                    <label className='todo-item'>
-                        <input type={'checkbox'} checked={task.checked} />
-                        <div>{task.desc}</div>
-                        <button>Delete</button>
-                    </label>
-                );
-            })}
+            {todos.map((todo) => (
+                <label key={todo.id} className='todo-item'>
+                    <input
+                        type={'checkbox'}
+                        checked={todo.isChecked} 
+                        onClick={() => updateTodo(todo.id)}
+                    />
+                    <div style={todo.isChecked ? {textDecoration:"line-through"} : null}>{todo.desc}</div>
+                    <button onClick={() => deleteTodo(todo.id)}>Delete</button>
+                </label>
+            ))}
         </div>
     );
 }
+
+export default TodoList;

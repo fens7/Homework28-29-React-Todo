@@ -1,26 +1,41 @@
 import './App.css';
 import React, { useState } from 'react';
-import { TodoList } from './components/TodoList';
+import TodoList from './components/TodoList';
 
 function App() {
     const [todos, setTodos] = useState([]);
     const [value, setValue] = useState('');
 
-    function addTodo(e) {
-        e.preventDefault();
-        setTodos([
-            ...todos,
-            {
-                id: Math.floor(Math.random() * Number.MAX_SAFE_INTEGER),
-                desc: value,
-                checked: false,
-            },
-        ]);
-        setValue('');
-    }
-
     function getValue(e) {
         setValue(e.target.value);
+    }
+
+
+    function deleteTodo(id) {
+        const copy = [...todos].filter((todo) => todo.id !== id);
+        setTodos(copy);
+    }
+
+    function updateTodo(id) {
+        const copy = [...todos];
+        const current = copy.find((todo) => todo.id === id);
+        current.isChecked = !current.isChecked;
+        setTodos(copy);
+    }
+
+    function addTodo(e) {
+        e.preventDefault();
+        if (value) {
+            setTodos([
+                ...todos,
+                {
+                    id: Math.floor(Math.random() * Number.MAX_SAFE_INTEGER),
+                    desc: value,
+                    isChecked: false,
+                },
+            ]);
+            setValue('');
+        }
     }
 
     return (
@@ -37,7 +52,11 @@ function App() {
                     <button>Add Task</button>
                     <br></br>
                     <br></br>
-                    <TodoList values={todos} />
+                    <TodoList
+                        deleteTodo={deleteTodo}
+                        updateTodo={updateTodo}
+                        todos={todos}
+                    />
                 </form>
             </div>
         </div>
