@@ -1,6 +1,6 @@
 import './TodoList.css';
 
-function TodoList({ todos, updateTodo, deleteTodo, isChecked }) {
+function TodoList({ todos, updateTodo, deleteTodo }) {
     return (
         <div>
             {todos.map((todo) => (

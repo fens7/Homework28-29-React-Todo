@@ -6,11 +6,6 @@ function App() {
     const [todos, setTodos] = useState([]);
     const [value, setValue] = useState('');
 
-    function getValue(e) {
-        setValue(e.target.value);
-    }
-
-
     function deleteTodo(id) {
         const copy = [...todos].filter((todo) => todo.id !== id);
         setTodos(copy);
@@ -45,7 +40,7 @@ function App() {
                     <h1>Todo List</h1>
                     <input
                         value={value}
-                        onChange={getValue}
+                        onChange={(e) => setValue(e.target.value)}
                         type={'text'}
                         placeholder={'Type new task...'}
                     />
