@@ -1,6 +1,6 @@
 import './TodoList.css';
 import React, { useState } from 'react';
-import TodoListTasksRender from './TodoListTasksRender';
+import TodoListTasksRender from './TasksRender';
 
 function TodoLogic() {
     const [todos, setTodos] = useState([]);
@@ -45,7 +45,7 @@ function TodoLogic() {
                             type={'text'}
                             placeholder={'Type new task...'}
                         />
-                        <button disabled={value.length < 4}>Add Task</button>
+                        <button disabled={value.length <= 5}>Add Task</button>
                         <br></br>
                         <br></br>
                         <TodoListTasksRender
